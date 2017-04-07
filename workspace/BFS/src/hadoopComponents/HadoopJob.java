@@ -96,7 +96,7 @@ public class HadoopJob {
 		job.setOutputKeyClass(clsOutputKey);
 		job.setOutputValueClass(clsOutputValue);
 		
-		//job.setNumMapTasks(numMappers); 
+//		job.setNumMapTasks(numMappers); 
 		job.setNumReduceTasks(numReducers);
 		return job;
 	}

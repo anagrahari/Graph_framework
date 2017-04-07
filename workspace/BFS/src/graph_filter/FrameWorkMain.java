@@ -31,7 +31,7 @@ public class FrameWorkMain extends Configured implements Tool{
 		Method getNameMethod;
 		int iterationCount = 0;
 		int numMappers = 1;
-		int numReducers = 1;
+		int numReducers = 8;
 		Class cls;
 		
 		Job job;
@@ -51,8 +51,8 @@ public class FrameWorkMain extends Configured implements Tool{
 			isTerminate = (Boolean)getNameMethod.invoke(termination);
 			while (isTerminate.booleanValue()) {
 				//If need to set mappers and reducers here
-				//hJob.setNumReducers(numReducers);
-				//hJob.setNumMappers(numMappers);
+				hJob.setNumReducers(numReducers);
+				hJob.setNumMappers(numMappers);
 				
 				//get Job
 				job = hJob.createJob(hJob.getJobName());
