@@ -98,7 +98,7 @@ enum count {
 		
 		public static void main(String args[]) {
 			fwMain = new FrameWorkMain();
-			fwMain.runMain(args, CreateHadoopJob("BFS-1-8"));
+			fwMain.runMain(args, CreateHadoopJob("BFS-1-1"));
 		}
 
 	}

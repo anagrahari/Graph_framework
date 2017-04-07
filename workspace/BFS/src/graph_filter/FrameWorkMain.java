@@ -31,7 +31,7 @@ public class FrameWorkMain extends Configured implements Tool{
 		Method getNameMethod;
 		int iterationCount = 0;
 		int numMappers = 1;
-		int numReducers = 8;
+		int numReducers = 1;
 		Class cls;
 		
 		Job job;
