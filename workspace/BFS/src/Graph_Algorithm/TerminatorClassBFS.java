@@ -30,7 +30,7 @@ public class TerminatorClassBFS extends HadoopTerminator{
 		String inputPath = "";
 		if (iterationCount == 0) {
 			inputPath = "input/"+hJob.getJobName();
-			Node.convert(inputPath+"/sparkinput");
+			Node.convert(inputPath);
 		} else {
 			inputPath = "output/"+hJob.getJobName()+"-" + iterationCount;
 		}

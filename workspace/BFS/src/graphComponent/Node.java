@@ -4,20 +4,21 @@ import java.io.BufferedReader;
 
 import com.google.common.base.Joiner;
 
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-
 import java.util.Map;
+
+import org.apache.hadoop.conf.Configuration;
+import org.apache.hadoop.fs.FileSystem;
+import org.apache.hadoop.fs.Path;
 
 public class Node {
 	protected Integer id;
@@ -154,12 +155,13 @@ public class Node {
 		return weightList;
 	}
 	
-	public static void convert(String problemFile) throws IOException {
+	public static void convert(String path) throws IOException {
+		 	String problemFile = path + "/sparkinput";
 	        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(new File(problemFile))));
-
+	       
 	        int vertexCount = Integer.parseInt(reader.readLine());
 	        Map<Integer, Vertex> vertices = new HashMap<>(vertexCount);
-	        System.out.println("Vertex Count: " + vertexCount);
+//	        System.out.println("Vertex Count: " + vertexCount);
 
 	        vertices.put(SOURCE_VERTEX, new Vertex(SOURCE_VERTEX, new HashSet<Integer>(), 0, Color.GRAY));
 	        
@@ -169,25 +171,31 @@ public class Node {
 
 	        @SuppressWarnings("UnusedAssignment")
 	        String line = reader.readLine(); // number of edges [unused]
-	        System.out.println("Edges: " + line);
+//	        System.out.println("Edges: " + line);
 	        
 	        while ((line = reader.readLine()) != null) {
-	        	System.out.println(line);
+//	        	System.out.println(line);
 	        	String[] pair  = line.split(" ");
 	            int vertex1 = Integer.parseInt(pair[0]);
 	            int vertex2 = Integer.parseInt(pair[1]);
 	            vertices.get(vertex1).addNeighbour(vertex2);
 	            vertices.get(vertex2).addNeighbour(vertex1);
 	        }
-	        for (Vertex value : vertices.values()){
-	        	System.out.println(value.toString());
-	        }
+//	        for (Vertex value : vertices.values()){
+//	        	System.out.println(value.toString());
+//	        }
 	        
 //	       System.out.println(NEW_LINE.join(vertices.values()));
 	        
 	        try (PrintStream out = new PrintStream(new FileOutputStream("filename.txt"))) {
 	            out.print(NEW_LINE.join(vertices.values()));
 	        }
+	        
+	        Configuration conf = new Configuration();
+	        FileSystem fs = FileSystem.get(conf);
+	        Path localPath = new Path("filename.txt");
+	        Path hdfsPath = new Path(path+"/bfs");
+	        fs.copyFromLocalFile(localPath, hdfsPath);
 	        
 //	        Files.write(Paths.get(problemFile + "_0"), NEW_LINE.join(vertices.values()).getBytes(), StandardOpenOption.CREATE);
 	    }

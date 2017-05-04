@@ -47,7 +47,7 @@ public class HadoopTerminator {
 	{
 		String inputPath = "";
 		inputPath = "input/"+hJob.getJobName();
-		Node.convert(inputPath+"/sparkinput");
+//		Node.convert(inputPath);
 		return inputPath;
 	}
 	
