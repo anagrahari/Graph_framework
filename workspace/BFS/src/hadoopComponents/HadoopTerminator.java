@@ -1,6 +1,10 @@
 package hadoopComponents;
 
 
+import graphComponent.Node;
+
+import java.io.IOException;
+
 import org.apache.hadoop.mapreduce.Counters;
 
 
@@ -39,10 +43,11 @@ public class HadoopTerminator {
 	
 	}
 	
-	public String getInputPath(HadoopJob hJob)
+	public String getInputPath(HadoopJob hJob) throws IOException
 	{
 		String inputPath = "";
 		inputPath = "input/"+hJob.getJobName();
+		Node.convert(inputPath+"/sparkinput");
 		return inputPath;
 	}
 	

@@ -1,12 +1,35 @@
 package graphComponent;
 
+import java.io.BufferedReader;
+
+import com.google.common.base.Joiner;
+
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
+
+import java.util.Map;
 
 public class Node {
 	protected Integer id;
 	protected ArrayList<Integer> edgeList;
 	protected ArrayList<Float> weightList;
+	
+    private static final Joiner NEW_LINE = Joiner.on("\n");
+
+    /**
+     * Defines the starting point for BFS algorithm
+     */
+    private final static int SOURCE_VERTEX = 0;
 	
 	public Node(){
 		
@@ -130,4 +153,42 @@ public class Node {
 	{
 		return weightList;
 	}
+	
+	public static void convert(String problemFile) throws IOException {
+	        BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(new File(problemFile))));
+
+	        int vertexCount = Integer.parseInt(reader.readLine());
+	        Map<Integer, Vertex> vertices = new HashMap<>(vertexCount);
+	        System.out.println("Vertex Count: " + vertexCount);
+
+	        vertices.put(SOURCE_VERTEX, new Vertex(SOURCE_VERTEX, new HashSet<Integer>(), 0, Color.GRAY));
+	        
+	        for (int i = 1; i < vertexCount; i++) {
+	            vertices.put(i, new Vertex(i, new HashSet<Integer>(), Integer.MAX_VALUE, Color.WHITE));
+	        }
+
+	        @SuppressWarnings("UnusedAssignment")
+	        String line = reader.readLine(); // number of edges [unused]
+	        System.out.println("Edges: " + line);
+	        
+	        while ((line = reader.readLine()) != null) {
+	        	System.out.println(line);
+	        	String[] pair  = line.split(" ");
+	            int vertex1 = Integer.parseInt(pair[0]);
+	            int vertex2 = Integer.parseInt(pair[1]);
+	            vertices.get(vertex1).addNeighbour(vertex2);
+	            vertices.get(vertex2).addNeighbour(vertex1);
+	        }
+	        for (Vertex value : vertices.values()){
+	        	System.out.println(value.toString());
+	        }
+	        
+//	       System.out.println(NEW_LINE.join(vertices.values()));
+	        
+	        try (PrintStream out = new PrintStream(new FileOutputStream("filename.txt"))) {
+	            out.print(NEW_LINE.join(vertices.values()));
+	        }
+	        
+//	        Files.write(Paths.get(problemFile + "_0"), NEW_LINE.join(vertices.values()).getBytes(), StandardOpenOption.CREATE);
+	    }
 }

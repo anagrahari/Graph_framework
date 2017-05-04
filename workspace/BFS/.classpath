@@ -11,7 +11,7 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
@@ -38,5 +38,6 @@
 	<classpathentry exported="true" kind="lib" path="/usr/lib/hadoop/client/hadoop-mapreduce-client-jobclient-2.6.0-cdh5.8.0.jar"/>
 	<classpathentry exported="true" kind="lib" path="/usr/lib/hadoop/client/hadoop-mapreduce-client-shuffle.jar"/>
 	<classpathentry exported="true" kind="lib" path="/usr/lib/hadoop/client/hadoop-mapreduce-client-shuffle-2.6.0-cdh5.8.0.jar"/>
+	<classpathentry kind="lib" path="/home/cloudera/Downloads/guava-18.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
