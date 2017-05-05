@@ -117,6 +117,6 @@ public final class Vertex {
     		adjacent = adjacent + "," + String.valueOf(x); 		
     	}
     	
-        return id + TAB_SEPARATOR + adjacent + BAR_SEPARATOR + dist + BAR_SEPARATOR + color;
+        return id + TAB_SEPARATOR + adjacent + BAR_SEPARATOR + dist + BAR_SEPARATOR + color +  BAR_SEPARATOR;
     }
 }

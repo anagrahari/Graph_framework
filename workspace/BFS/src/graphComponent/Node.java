@@ -188,7 +188,9 @@ public class Node {
 //	       System.out.println(NEW_LINE.join(vertices.values()));
 	        
 	        try (PrintStream out = new PrintStream(new FileOutputStream("filename.txt"))) {
-	            out.print(NEW_LINE.join(vertices.values()));
+	        	String temp = NEW_LINE.join(vertices.values());
+	        	temp = temp + "\n";
+	            out.print(temp);
 	        }
 	        
 	        Configuration conf = new Configuration();
