@@ -162,15 +162,18 @@ public class Node {
 	        int vertexCount = Integer.parseInt(reader.readLine());
 	        Map<Integer, Vertex> vertices = new HashMap<>(vertexCount);
 //	        System.out.println("Vertex Count: " + vertexCount);
-
-	        vertices.put(SOURCE_VERTEX, new Vertex(SOURCE_VERTEX, new HashSet<Integer>(), 0, Color.GRAY));
+	        String line = reader.readLine(); // number of edges [unused]
+	        String []next  = reader.readLine().split(" ");
+	        int source = Integer.parseInt(next[0]);
+	        int neighbor = Integer.parseInt(next[1]);
+	        
+	        vertices.put(source, new Vertex(source, new HashSet<Integer>(), 0, Color.GRAY));
+	        vertices.get(source).addNeighbour(neighbor);
 	        
 	        for (int i = 1; i < vertexCount; i++) {
 	            vertices.put(i, new Vertex(i, new HashSet<Integer>(), Integer.MAX_VALUE, Color.WHITE));
 	        }
-
-	        @SuppressWarnings("UnusedAssignment")
-	        String line = reader.readLine(); // number of edges [unused]
+	        
 //	        System.out.println("Edges: " + line);
 	        
 	        while ((line = reader.readLine()) != null) {
