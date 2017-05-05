@@ -164,14 +164,19 @@ public class Node {
 //	        System.out.println("Vertex Count: " + vertexCount);
 	        String line = reader.readLine(); // number of edges [unused]
 	        String []next  = reader.readLine().split(" ");
+//	        System.out.println("First Line:" + next);
 	        int source = Integer.parseInt(next[0]);
 	        int neighbor = Integer.parseInt(next[1]);
 	        
 	        vertices.put(source, new Vertex(source, new HashSet<Integer>(), 0, Color.GRAY));
 	        vertices.get(source).addNeighbour(neighbor);
+//	        for (Vertex value : vertices.values()){
+//	        	System.out.println(value.toString());
+//	        }
 	        
 	        for (int i = 1; i < vertexCount; i++) {
-	            vertices.put(i, new Vertex(i, new HashSet<Integer>(), Integer.MAX_VALUE, Color.WHITE));
+	        	if(!vertices.containsKey(i))
+	        		vertices.put(i, new Vertex(i, new HashSet<Integer>(), Integer.MAX_VALUE, Color.WHITE));
 	        }
 	        
 //	        System.out.println("Edges: " + line);
