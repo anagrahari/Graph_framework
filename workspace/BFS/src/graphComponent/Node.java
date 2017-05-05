@@ -181,8 +181,10 @@ public class Node {
 	        	String[] pair  = line.split(" ");
 	            int vertex1 = Integer.parseInt(pair[0]);
 	            int vertex2 = Integer.parseInt(pair[1]);
-	            vertices.get(vertex1).addNeighbour(vertex2);
-	            vertices.get(vertex2).addNeighbour(vertex1);
+	            if (vertices.containsKey(vertex1) && vertices.containsKey(vertex2)) {
+	            	vertices.get(vertex1).addNeighbour(vertex2);
+	            	vertices.get(vertex2).addNeighbour(vertex1);
+	            }
 	        }
 //	        for (Vertex value : vertices.values()){
 //	        	System.out.println(value.toString());

@@ -51,6 +51,7 @@ public class FrameWorkMain extends Configured implements Tool{
 			isTerminate = (Boolean)getNameMethod.invoke(termination);
 			while (isTerminate.booleanValue()) {
 				//If need to set mappers and reducers here
+				iterationCount++;
 				hJob.setNumReducers(numReducers);
 				hJob.setNumMappers(numMappers);
 				
